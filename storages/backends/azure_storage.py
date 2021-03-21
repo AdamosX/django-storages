@@ -218,6 +218,7 @@ class AzureStorage(BaseStorage):
 
     def exists(self, name):
         blob_client = self.client.get_blob_client(self._get_valid_path(name))
+        return blob_client.exists()
         try:
             blob_client.get_blob_properties()
             return True
