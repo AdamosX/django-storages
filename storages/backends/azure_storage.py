@@ -160,7 +160,13 @@ class AzureStorage(BaseStorage):
                 account_domain)
         credential = None
         if self.account_key:
-            credential = self.account_key
+            connection_string = "{}://{}".format(
+                self.azure_protocol,
+                account_domain)
+            credential = {
+                'account_name': self.account_name,
+                'account_key': self.account_key
+            }
         elif self.sas_token:
             credential = self.sas_token
         elif self.token_credential:
